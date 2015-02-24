@@ -15,11 +15,10 @@ This ACL model is based on three abstract concepts:
 #APIs, How to use.
 
 ###Create a concern
-  acl.createConcern(concernName, persistence, exceptionalRulesCallaback)
+  acl.createConcern(concernName, persistence, exceptionalRulesFunction)
 
   
 ###Exemple of how to create/initialise two concerns:
-  acl.createConcern(concernName, persistence, exceptionalRulesCallaback)
 
        var acl    = require("acl-magic");
        var cache  =  acl.createCache();
@@ -34,8 +33,7 @@ This ACL model is based on three abstract concepts:
           return true;
           }
       //you can add also other fancy checks, shortcuts, etc
-      /*it is possible to use a negative rights approach by simple creating a "deny" concern and 
-      negate conditions in additional rule
+      /*For example. we can imagine to be  possible to use model deny kind of approach by simple creating a "deny" concern andnegate conditions in exceptional rules function of a concern that owns no grant records by itself
       */
         return false;
       });
