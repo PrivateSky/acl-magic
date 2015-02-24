@@ -40,8 +40,6 @@ This ACL model is based on three abstract concepts:
         return false;
       });
   
-###Create a concern
-  acl.createConcern(concernName, persistence, exceptionalRulesCallaback)
 
 ###Add parentnode for a resources
       acl.addResourceParent(resourcesUID, parentUid)
