@@ -39,23 +39,22 @@ This ACL model is based on three abstract concepts:
       });
   
 
-###Add parentnode for a resources
+###Add parent node for a resources
       acl.addResourceParent(resourcesUID, parentUid)
 
 ###Include a zone in another access zone
       acl.addZoneParent(zoneId, parentZoneId)
 
-###Allow a zone to access a resource or soutree from that resources
+###Allow a zone to access a resource or subtree from that resources
      concern.grant(zoneId, resourceId)
 
-###Allow a zone to access a resource or soutree from that resources
+###Remove the grant record for a zone on a subtree from that resources
      concern.ungrant(zoneId, resourceId)
 
   
 ###Test if an user has access to a resource or tree of resources
       concern.allow(zoneId, resourceId, callback)
 
-  
 #The algorithm (for checking with allow on a specific concern)
        Step 1: load recrusively all the parents for a specific zoneId 
             cache.loadZoneParents(zoneId, callback)
