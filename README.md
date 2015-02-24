@@ -47,10 +47,10 @@ This ACL model is based on three abstract concepts:
 ###Include a zone in another access zone
       acl.addZoneParent(zoneId, parentZoneId)
 
-###Allow a zone to access a resource or soubtree from that resources
+###Allow a zone to access a resource or soutree from that resources
      concern.grant(zoneId, resourceId)
 
-###Allow a zone to access a resource or soubtree from that resources
+###Allow a zone to access a resource or soutree from that resources
      concern.ungrant(zoneId, resourceId)
 
   
