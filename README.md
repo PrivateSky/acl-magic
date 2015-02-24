@@ -1,6 +1,6 @@
 # acl-magic: magicaly simple but powerfull ACL (Access Control List) node.js module
 
-acl-magic provided  pluginisable persistence and cache control and an extensible way to  model all kind of requirements (you can add arbitrarly complex rules in js code but still use the main acl-magic concepts)
+acl-magic provided  pluginisable persistence and cache control and an extensible way to  model all kind of requirements. Arbitrarly complex rules can be added within js code but still use the main acl-magic concepts.
 
 This ACL model is based on three abstract concepts:
   1. Resources: You got a directed graph of resources that can represent the final records, categories, intermediate branches, anything). This graph does't have cycles but can have multiple start roots. All graph nodes are just strings, identifying uniquely a resource.
