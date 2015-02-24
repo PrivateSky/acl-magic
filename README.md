@@ -1,16 +1,16 @@
-# acl-magic
+# acl-magic: magicaly simple but powerfull ACL (Access Control List) as node.js module
 
-Simple and generic API for ACLs for node.js with pluginisable persistence and cache. The permission model can model all kind of requirements (you can add arbitrarly complex rules in js code)
+acl-magic provided  pluginisable persistence and cache control and an extensible way to  model all kind of requirements (you can add arbitrarly complex rules in js code but still use the main acl-magic concepts)
 
 This ACL model is based on three abstract concepts:
-  1. Resources: You got a directed graph of resources that can represent the final records, categories, intermediate branches, anything). This graph does't have cycles but can have multiple start roots. All graph nodes are just strings, identifying uniquely a resources.
-  2. Zones:  You have users belonging to various access area (groups, roles, etc). The user itslef is an access area.
+  1. Resources: You got a directed graph of resources that can represent the final records, categories, intermediate branches, anything). This graph does't have cycles but can have multiple start roots. All graph nodes are just strings, identifying uniquely a resource.
+  2. Zones:  You have users belonging to various access area (groups, roles, etc). The user itslef is an access area. A zone can have multiple parent zones. A zone inherits rights from all the parent zones.
   3. Concerns: You can have various concerns (specific actions in your application or things like capabilities: read/write, etc)
 
 #Implementation
  We try to be as fast as possbile and  load things from the database as lazy as possible (only when required).
- The  "allow" function  can test only if a zone (user or role, group,etc) has acces on a specific resource or a specific part of a resource graph.  Therefore, we load only the parents of that resource and try to find grant records specific for that resource and all the super zones of the  user (or zone).
- It is possible to write your own persistence engine and your own cache. The default cache just keeps everything in memory for ever. You can chain concerns and add your own specific rules regarding permisions, access shortcuts, etc.  
+ The  "allow" function  can test  if a zone (user or role, group,etc) has acces on a specific resource or a specific part of a resource graph.  Therefore, we load only the parents of that resource and try to find grant records specific for that resource and all the super zones of the  user (or zone).
+ It is possible to write your own persistence engine and your own cache. The default cache just keeps everything in memory for 5 minutes. The cache in informed by any new grant records but ignores them.  You can chain concerns and add your own specific rules regarding permisions, access shortcuts, etc.  
 
 #How to use?
   
