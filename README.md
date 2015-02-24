@@ -71,13 +71,13 @@ This ACL model is based on three abstract concepts:
  
 #Other functions
 
-###create redis persistence
+###Create redis persistence
       var persistence =  acl.createRedisPersistence(redisConenction, cache);//cache is optional
       
-###create memory persistence (for testing mainly..)
+###Create memory persistence (for testing mainly..)
       var persistence =  acl.createMemoryPersistence(redisConenction);
       
-###create cache
+###Create cache
       var cache  =  acl.createCache();
       
  
