@@ -15,7 +15,9 @@ This module is based on an a story containing three concepts:
        var acl = require("acl-magic");
        var persistence = acl.createRedisPersistnece(redisConenction);
        /*
-        initialise an readCorncern for resources with the additional rule that if the user is allowed from the   writeConcern (has write rights), should allow also read access
+        initialise an readCorncern for resources with the additional rule that if the user is allowed 
+        to write the resources it means read acces also
+        We assume knowledge of an instance of writeConcern
        */
        var readConcern = acl.create("read", persistence, function(userId,resourceId){
         if(writeConccern.allow(userId,resourceId)){
