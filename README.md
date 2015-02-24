@@ -16,6 +16,8 @@ This ACL model is based on three abstract concepts:
   
 ###Exemple of how to create/initialise two concerns:
 
+      acl.createConcern(concernName, persistence, exceptionalRulesCallaback)
+
        var acl    = require("acl-magic");
        var cache  =  acl.createCache();
        var persistence =  acl.createRedisPersistence(redisConenction, cache);//cache is optional
@@ -29,7 +31,9 @@ This ACL model is based on three abstract concepts:
           return true;
           }
       //you can add also other fancy checks, shortcuts, etc
-      //it is possible to use a negative rights approach by simple creating a "deny" concern and 
+      /*it is possible to use a negative rights approach by simple creating a "deny" concern and 
+      negate conditions in additional rule
+      */
         return false;
       });
   
