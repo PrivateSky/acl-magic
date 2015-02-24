@@ -12,17 +12,17 @@ This module is based on an a story containing three concepts:
   
 ###Create/initialise a concern:
 
-   var acl = require("acl-magic");
-   var persistence = acl.createRedisPersistnece(redisConenction);
-   /*
-    initialise an readCorncern for resources with the additional rule that if the user is allowed from the   writeConcern (has write rights), should allow also read access
-   */
-   var readConcern = acl.create("read", persistence, function(userId,resourceId){
-    if(writeConccern.allow(userId,resourceId)){
-      return true;
-      }
-    return false;
-  });
+       var acl = require("acl-magic");
+       var persistence = acl.createRedisPersistnece(redisConenction);
+       /*
+        initialise an readCorncern for resources with the additional rule that if the user is allowed from the   writeConcern (has write rights), should allow also read access
+       */
+       var readConcern = acl.create("read", persistence, function(userId,resourceId){
+        if(writeConccern.allow(userId,resourceId)){
+          return true;
+          }
+        return false;
+      });
   
 
 ###Add parentnode for a resources
