@@ -1,28 +1,35 @@
 # acl-magic
 
-Simple and generic API for ACLs for node.js
-- pluginisable persistence (only  redis persistence is provided for now)
+Simple and generic API for ACLs for node.js with pluginisable persistence and cache. The permission model can model all kind of requirements (you can add arbitrarly complex rules in js code)
 
-This module is based on an a story containing three concepts:
-  1. Resources: You got a directed graph of resources that can represent the final records, categories, intermediate branches, anything). This graph does't have cycles and but can have multiple start roots. All graph nodes are just strings, identifying uniquely a resources.
-  2. Zones:  You have users belonging to various access areas (groups, roles, etc). the user itslef is an access areas.
+This ACL model is based on three abstract concepts:
+  1. Resources: You got a directed graph of resources that can represent the final records, categories, intermediate branches, anything). This graph does't have cycles but can have multiple start roots. All graph nodes are just strings, identifying uniquely a resources.
+  2. Zones:  You have users belonging to various access area (groups, roles, etc). The user itslef is an access area.
   3. Concerns: You can have various concerns (specific actions in your application or things like capabilities: read/write, etc)
-  
+
+#Implementation
+ We try to be as fast as possbile and  load things from the database as lazy as possible (only when required).
+ The  "allow" function  can test only if a zone (user or role, group,etc) has acces on a specific resource or a specific part of a resource graph.  Therefore, we load only the parents of that resource and try to find grant records specific for that resource and all the super zones of the  user (or zone).
+ It is possible to write your own persistence engine and your own cache. The default cache just keeps everything in memory for ever. You can chain concerns and add your own specific rules regarding permisions, access shortcuts, etc.  
+
 #How to use?
   
-###Create/initialise a concern:
+###Exemple of how to create/initialise two concerns:
 
-       var acl = require("acl-magic");
-       var persistence = acl.createRedisPersistnece(redisConenction);
+       var acl    = require("acl-magic");
+       var cache  =  acl.createCache();
+       var persistence =  acl.createRedisPersistence(redisConenction, cache);//cache is optional
+       var writeConcern = acl.createConcern("write", persistence);
        /*
-        initialise an readCorncern for resources with the additional rule that if the user is allowed 
+        initialise a readCorncern for resources with the additional rule that if the user is allowed 
         to write the resources it means read acces also
-        We assume knowledge of an instance of writeConcern
        */
-       var readConcern = acl.create("read", persistence, function(userId,resourceId){
-        if(writeConccern.allow(userId,resourceId)){
+       var readConcern = acl.createConcern("read", persistence, function(zoneId,resourceId){
+        if(writeConccern.allow(zoneId,resourceId)){
           return true;
           }
+      //you can add also other fancy checks, shortcuts, etc
+      //it is possible to use a negative rights approach by simple creating a "deny" concern and 
         return false;
       });
   
@@ -37,12 +44,29 @@ This module is based on an a story containing three concepts:
      concern.grant(zoneId, resourceId)
   
 ###Test if an user has access to a resource or tree of resources
-      concern.allow(userId, resourceId, callback)
+      concern.allow(zoneId, resourceId, callback)
 
   
-#Implementation
- We try to be as fast but as lazy as possible and load things from database only when required.
- The only access api is allow an can test only if an user has acces on a specific resource or a specific part of a resource graph. Therefore, we load only the parents of that resource and try to find grant records specific for that 
- resource and all the super zones of the current user.
+#Algorithm for allow check on a specific concern
+ Step 1: load recrusively all the parents for a specific zoneId 
+      cache.loadZoneParents(zoneId, callback)
+ Step 2: for grant records
+      cache.loadGrantrecords(resourceId, callback)
+ Step 3: test if any parent is in grant records. If it successfully find one such record, finish and returns true
+ Step 4: recursively, load parents resources and try step 3
+ Step 5: if exist. returns the result of the exceptional rule for this concern
+ Step 6: return false (is not allowed)
  
+ 
+#Other functions
+
+###create redis persistence
+      var persistence =  acl.createRedisPersistence(redisConenction, cache);//cache is optional
+      
+###create memory persistence (for testing mainly..)
+      var persistence =  acl.createMemoryPersistence(redisConenction);
+      
+###create cache
+      var cache  =  acl.createCache();
+      
  
