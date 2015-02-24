@@ -4,7 +4,7 @@ acl-magic provided  pluginisable persistence and cache control and an extensible
 
 This ACL model is based on three abstract concepts:
   1. Resources: You got a directed graph of resources that can represent the final records, categories, intermediate branches, anything). This graph does't have cycles but can have multiple start roots. All graph nodes are just strings, identifying uniquely a resource.
-  2. Zones:  You have users belonging to various access area (groups, roles, etc). The user itslef is an access area. A zone can have multiple parent zones. A zone inherits rights from all the parent zones.
+  2. Zones:  You have users belonging to various access area (groups, roles, etc). The user himslef is an access area. A zone can have multiple parent zones. A zone inherits rights from all the parent zones.
   3. Concerns: You can have various concerns (specific actions in your application or things like capabilities: read/write, etc)
 
 #Implementation
