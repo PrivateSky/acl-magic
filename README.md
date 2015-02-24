@@ -12,11 +12,14 @@ This ACL model is based on three abstract concepts:
  The  "allow" function  can test  if a zone (user or role, group,etc) has acces on a specific resource or a specific part of a resource graph.  Therefore, we load only the parents of that resource and try to find grant records specific for that resource and all the super zones of the  user (or zone).
  It is possible to write your own persistence engine and your own cache. The default cache just keeps everything in memory for 5 minutes. The cache in informed by any new grant records but ignores them.  You can chain concerns and add your own specific rules regarding permisions, access shortcuts, etc.  
 
-#How to use?
+#APIs, How to use.
+
+###Create a concern
+  acl.createConcern(concernName, persistence, exceptionalRulesCallaback)
+
   
 ###Exemple of how to create/initialise two concerns:
   acl.createConcern(concernName, persistence, exceptionalRulesCallaback)
-
 
        var acl    = require("acl-magic");
        var cache  =  acl.createCache();
@@ -37,6 +40,8 @@ This ACL model is based on three abstract concepts:
         return false;
       });
   
+###Create a concern
+  acl.createConcern(concernName, persistence, exceptionalRulesCallaback)
 
 ###Add parentnode for a resources
       acl.addResourceParent(resourcesUID, parentUid)
