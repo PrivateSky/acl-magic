@@ -15,8 +15,8 @@ This ACL model is based on three abstract concepts:
 #How to use?
   
 ###Exemple of how to create/initialise two concerns:
+  acl.createConcern(concernName, persistence, exceptionalRulesCallaback)
 
-      acl.createConcern(concernName, persistence, exceptionalRulesCallaback)
 
        var acl    = require("acl-magic");
        var cache  =  acl.createCache();
