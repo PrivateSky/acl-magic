@@ -28,16 +28,16 @@ This module is based on an a story containing three concepts:
   
 
 ###Add parentnode for a resources
-  acl.addResourceParent(resourcesUID, parentUid)
+      acl.addResourceParent(resourcesUID, parentUid)
 
 ###Include a zone in another access zone
-  acl.addZoneParent(zoneId, parentZoneId)
+      acl.addZoneParent(zoneId, parentZoneId)
 
 ###Allow a zone to access a resource or soubtree from that resources
-  concern.grant(zoneId, resourceId)
+     concern.grant(zoneId, resourceId)
   
 ###Test if an user has access to a resource or tree of resources
-  concern.allow(userId, resourceId, callback)
+      concern.allow(userId, resourceId, callback)
 
   
 #Implementation
