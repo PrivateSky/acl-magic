@@ -8,9 +8,9 @@ This module is based on an a story containing three concepts:
   2. Zones:  You have users belonging to various access areas (groups, roles, etc). the user itslef is an access areas.
   3. Concerns: You can have various concerns (specific actions in your application or things like capabilities: read/write, etc)
   
-###How to use?
+#How to use?
   
-#Create/initialise a concern:
+###Create/initialise a concern:
 
    var acl = require("acl-magic");
    var persistence = acl.createRedisPersistnece(redisConenction);
@@ -25,16 +25,16 @@ This module is based on an a story containing three concepts:
   });
   
 
-#Add parentnode for a resources
+###Add parentnode for a resources
   acl.addResourceParent(resourcesUID, parentUid)
 
-#Include a zone in another access zone
+###Include a zone in another access zone
   acl.addZoneParent(zoneId, parentZoneId)
 
-#Allow a zone to access a resource or soubtree from that resources
+###Allow a zone to access a resource or soubtree from that resources
   concern.grant(zoneId, resourceId)
   
-#Test if an user has access to a resource or tree of resources
+###Test if an user has access to a resource or tree of resources
   concern.allow(userId, resourceId, callback)
 
   
