@@ -1,4 +1,4 @@
-# acl-magic: magicaly simple but powerfull ACL (Access Control List) as node.js module
+# acl-magic: magicaly simple but powerfull ACL (Access Control List) node.js module
 
 acl-magic provided  pluginisable persistence and cache control and an extensible way to  model all kind of requirements (you can add arbitrarly complex rules in js code but still use the main acl-magic concepts)
 
