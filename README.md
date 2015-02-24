@@ -47,15 +47,15 @@ This ACL model is based on three abstract concepts:
       concern.allow(zoneId, resourceId, callback)
 
   
-#Algorithm for allow check on a specific concern
- Step 1: load recrusively all the parents for a specific zoneId 
-      cache.loadZoneParents(zoneId, callback)
- Step 2: for grant records
-      cache.loadGrantrecords(resourceId, callback)
- Step 3: test if any parent is in grant records. If it successfully find one such record, finish and returns true
- Step 4: recursively, load parents resources and try step 3
- Step 5: if exist. returns the result of the exceptional rule for this concern
- Step 6: return false (is not allowed)
+#The algorithm (for checking with allow on a specific concern)
+       Step 1: load recrusively all the parents for a specific zoneId 
+            cache.loadZoneParents(zoneId, callback)
+       Step 2: for grant records
+            cache.loadGrantrecords(resourceId, callback)
+       Step 3: test if any parent is in grant records. If it successfully find one such record, finish and returns true
+       Step 4: recursively, load parents resources and try step 3
+       Step 5: if exist. returns the result of the exceptional rule for this concern
+       Step 6: return false (is not allowed)
  
  
 #Other functions
