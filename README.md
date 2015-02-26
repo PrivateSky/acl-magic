@@ -16,29 +16,10 @@ This ACL model is based on three abstract concepts:
 #APIs, How to use.
 
 ###Create a concern
-  acl.createConcern(concernName, persistence, exceptionalRulesFunction)
+  acl.createConcern(concernName, persistence, exceptionalRulesFunction, postCheckFunction)
 
-  
-###Exemple of how to create/initialise two concerns:
+ Please take an look in tests for how to use it.
 
-       var acl    = require("acl-magic");
-       var cache  =  acl.createCache();
-       var persistence =  acl.createRedisPersistence(redisConnection, cache);//cache is optional
-       var writeConcern = acl.createConcern("write", persistence);
-       /*
-        initialise a readConcern for resources with the additional rule that if the user is allowed
-        to write the resources it means read access also
-       */
-       var readConcern = acl.createConcern("read", persistence, function(zoneId,resourceId){
-        if(writeConcern.allow(zoneId,resourceId)){
-          return true;
-          }
-      //you can add also other fancy checks, shortcuts, etc
-      /*For example. we can imagine to be  possible to use model deny kind of approach by simple creating a "deny" concern and negate conditions in exceptional rules function of a concern that owns no grant records by itself
-      */
-        return false;
-      });
-  
 
 ###Add parent node for a resources
       persistence.addResourceParent(resourcesUID, parentUid)

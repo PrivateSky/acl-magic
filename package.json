@@ -1,7 +1,7 @@
 {
   "name": "acl-magic",
   "description": "ACL support for node.js projects. Created for SwarmCore/ SwarmESB it is reusable and has no dependencies",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/salboaie/acl-magic",
   "author": {
     "name": "Alboaie Sinica",
@@ -35,12 +35,12 @@
       "url": "http://www.gnu.org/licenses/lgpl.html"
     }
   ],
-  "_id": "acl-magic@1.0.0",
+  "_id": "acl-magic@1.0.1",
   "dependencies": {},
   "optionalDependencies": {},
   "_engineSupported": true,
   "_npmVersion": "1.1.12",
-  "_nodeVersion": "v0.6.14",
+  "_nodeVersion": "v0.10.0",
   "_defaultsLoaded": true,
   "dist": {
     
