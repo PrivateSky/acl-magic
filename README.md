@@ -18,7 +18,7 @@ This ACL model is based on three abstract concepts:
 ###Create a concern
   acl.createConcern(concernName, persistence, exceptionalRulesFunction, postCheckFunction)
 
- Please take an look in tests for how to use it.
+ Please take an look in tests for how to use it (https://github.com/salboaie/acl-magic/blob/master/test/aclTest.js).
 
 
 ###Add parent node for a resources
