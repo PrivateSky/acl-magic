@@ -1,6 +1,6 @@
 var acl = require("../lib/acl.js");
 
-var assert  = require('assert');
+var assert  = require('double-check').assert;
 
 /*
     create persistence to store relations between resources and between security zones
