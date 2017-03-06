@@ -1,11 +1,11 @@
+var logger = require('double-check').logger;
+logger.logConfig.display.debug = false;
+
 var acl = require("../lib/acl.js");
 
 var assert  = require('double-check').assert;
-
-/*
-    create persistence to store relations between resources and between security zones
-*/
-var persistence =  acl.createMemoryPersistence();
+var redis = require('redis').createClient();
+var persistence =  acl.createRedisPersistence(redis);
 /*
  - create an concern regarding write rights on some resources
  - zone  "root" have full access everywhere by default. A zone can be a user, a role, a group... your choise
@@ -57,15 +57,26 @@ persistence.loadZoneParents("user_1", function(err, res){
 persistence.addZoneParent("role_2", "user");
 
 /* ..add more parents */
+
+persistence.addResourceParent("r_1", "parent1");
+persistence.addResourceParent("r_2", "parent1");
+
+
 persistence.addResourceParent("r_1", "m_1");
 persistence.addResourceParent("r_1", "f_1");
 persistence.addResourceParent("r_2", "m_1");
 persistence.addResourceParent("r_2", "m_2");
 
+
+persistence.addResourceParent("r_2", "m_2");
+
+
 /*
   grant in the write concern, rights for m_1 to zone "admin"
 */
 writeConcern.grant("admin", "m_1");
+
+writeConcern.grant("admin", "parent1");
 
 writeConcern.allow("user_1", "r_1", function(err, res){
         assert.equal(res, true);
