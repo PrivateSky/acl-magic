@@ -113,8 +113,10 @@ function runTest(aclConfigurator,end){
                             assert.fail("Failed remove all rules\nErrors encountered:", err);
                         }
                         else {
-                            redisClient.quit();
-                            end()
+                            end();
+                            aclConfigurator.flushExistingRules(function(err,result){
+                                redisClient.quit();
+                            })
                         }
                     })
                 }

@@ -107,8 +107,10 @@ function runTest(aclConfigurator,aclChecker,testFinished){
                         assert.equal(result,testCase["expectedResult"],"accessExceptionsTest failed for user "+testCase["user"])
                         testsPassed++;
                         if(testsPassed===testCases.length){
-                            redisClient.quit();
                             testFinished();
+                            aclConfigurator.flushExistingRules(function(err,result){
+                                redisClient.quit();
+                            })
                         }
                     }
                 })

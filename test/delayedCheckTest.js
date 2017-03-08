@@ -111,8 +111,10 @@ function runTest(aclConfigurator,aclChecker,redisClient,end){
                         assert.equal(result,testCase["expectedResult"],"delayedChecksTest failed for user "+testCase["user"])
                         testsPassed++;
                         if(testsPassed===testCases.length){
-                            redisClient.quit();
                             end();
+                            aclConfigurator.flushExistingRules(function(err,result){
+                                redisClient.quit();
+                            })
                         }
 
                     }

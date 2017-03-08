@@ -105,7 +105,9 @@ function runTest(aclConfigurator,aclChecker,redisClient){
                             if (testsPassed === testCases.length*numRepeatedChecks) {
                                 console.log("Performed "+numRepeatedChecks*testCases.length+" checks");
                                 console.timeEnd("Execution time");
-                                redisClient.quit();
+                                aclConfigurator.flushExistingRules(function(err,result){
+                                    redisClient.quit();
+                                })
                             }
 
                         }
