@@ -37,7 +37,9 @@
   ],
   "_id": "acl-magic@1.0.10",
   "dependencies" : {
-    "asynchron": ">=1.0.18"
+    "asynchron": ">=1.0.18",
+    "safebox":">=0.2.1",
+    "double-check":">=0.1.5"
   },
   "optionalDependencies": {},
   "_engineSupported": true,
