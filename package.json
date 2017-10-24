@@ -1,7 +1,7 @@
 {
   "name": "acl-magic",
   "description": "ACL support for node.js with redis persistence. Powerfull: ACLs + exceptional rules in js code. Created for SwarmCore/ SwarmESB but reusable in any node.js project",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "homepage": "https://github.com/salboaie/acl-magic",
   "author": {
     "name": "Alboaie Sinica",
@@ -35,9 +35,11 @@
       "url": "http://www.gnu.org/licenses/lgpl.html"
     }
   ],
-  "_id": "acl-magic@1.0.10",
+  "_id": "acl-magic@1.0.11",
   "dependencies" : {
-    "asynchron": ">=1.0.18"
+    "asynchron": ">=1.0.18",
+    "safebox":">=0.2.1",
+    "double-check":">=0.1.5"
   },
   "optionalDependencies": {},
   "_engineSupported": true,
