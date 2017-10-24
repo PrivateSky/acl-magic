@@ -21,6 +21,30 @@ As you can see bellow, two concerns can share the same persistence but could als
  The cache is informed by any new grant records but in the default implementation it just ignores them.  You can chain concerns and add your own specific rules regarding permissions, access shortcuts, etc.
 
 
+
+
+#ACL Configurator
+    The acl configurator is an object that exposes a CRUD-type of API on the acl database. (add/delete rules, resources etc)
+    Each of the operations can be safely called at any point in time regardless of the status of the database connection.
+    However, whenever a dependency is not met (the database connection for instance), the callback returns with error.
+    For now any error that occurs is further passed to be treated in a superior layer.
+
+
+#ACL Checker
+    This is the function that performs the checks in the database. This goes as follows:
+         Check whether the user appears on the black list. If so, deny access.
+         Check then on the white list. If he appears, allow access.
+         Else deny access.
+
+    This system functions as a white list with exceptions. Basicaly you can add 'white rules' with broad coverage, and use a few 'black rules' to amend the white rules.
+    The system is logically equivalent with a pure 'white list' or a pure 'black list',but has the advantage that it is more user friendly with less rules to add and a more intuitive approach.
+
+
+Both the ACL Configurator and ACL Checker must be enabled in order to function. They make heavy use of 'safebox' , a dependency-injection library. As the acl checker makes use of a database connection (Redis)
+ it is useful to make sure that the function is always available and eventually responds (even in the event of some failure in the connection with the database). This is ensured through the use of call buffers
+ and a mechanism of 'delayedCheck' that queues calls and performes them once the dependencies (database connection) are met again.
+
+
 #APIs, How to use.
 
 ###Create a concern
