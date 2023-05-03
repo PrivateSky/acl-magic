@@ -25,7 +25,6 @@
     "lib": "./lib"
   },
   "engines": {
-
     "node": ">=0.6.0"
   },
   "main": "./lib/acl.js",
@@ -36,17 +35,15 @@
     }
   ],
   "_id": "acl-magic@1.0.11",
-  "dependencies" : {
+  "dependencies": {
     "asynchron": ">=1.0.18",
-    "safebox":">=0.2.1",
-    "double-check":">=0.1.5"
+    "double-check": ">=0.1.5",
+    "safebox": ">=0.2.1",
+    "whys": "^0.2.2"
   },
-  "optionalDependencies": {},
   "_engineSupported": true,
   "_npmVersion": "1.1.12",
   "_nodeVersion": "v0.10.0",
   "_defaultsLoaded": true,
-  "dist": {
-    
-  }
+  "dist": {}
 }

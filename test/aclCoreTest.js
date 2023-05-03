@@ -1,7 +1,7 @@
 var logger = require('double-check').logger;
-logger.logConfig.display.debug = false;
+// logger.logConfig.display.debug = false;
 
-var acl = require("../lib/acl.js");
+var acl = require("../index.js");
 var assert  = require('double-check').assert;
 var persistence =  acl.createMemoryPersistence();
 
@@ -30,6 +30,12 @@ persistence.addResourceParent("r_2", "m_1");
 persistence.addResourceParent("r_2", "m_2");
 persistence.addResourceParent("r_2", "m_2");
 persistence.addResourceParent("m_2", "g_x");
+
+// tables -> tabele particulare -> implementat verificare existenta resursa
+// dids -> 
+// ssis
+// privateKeys 
+// secretKeys 
 
 assert.steps("Acl core test",[
     function(next){
