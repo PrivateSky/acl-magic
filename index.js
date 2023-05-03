@@ -1,14 +1,14 @@
 
-var persist  = require("./persistence.js");
-var cache    = require("./cache.js");
+var persist  = require("./lib/persistence.js");
+var cache    = require("./lib/cache.js");
 require("asynchron");
 
-exports.createRedisPersistence = function(redisConnection, cache,type){
+exports.createEnclavePersistence = function(enclave, cache, type){
     if(!cache){
         cache = exports.createCache();
     }
-    return persist.createRedisPersistence(redisConnection, cache,type);
-};
+    return persist.createEnclavePersistence(enclave, cache, type);
+}
 
 exports.createMemoryPersistence = function(){
     return persist.createMemoryPersistence();
@@ -68,22 +68,20 @@ function lazyAsyncDeepTreeChecker(root, getChildren, checkFunction, returnCallBa
 function Concern(concernName, persistence, exceptionalRulesFunction, afterCheckFunction){
     var self = this;
 
-    this.grant = function(zoneId, resourceId){
-        persistence.grant(concernName,zoneId, resourceId);
+    this.grant = function(zoneId, resourceId, callback){
+        persistence.grant(concernName,zoneId, resourceId, callback);
     }
 
-    this.ungrant = function(zoneId, resourceId){
-        persistence.ungrant(concernName,zoneId, resourceId);
+    this.ungrant = function(zoneId, resourceId, callback){
+        persistence.ungrant(concernName,zoneId, resourceId, callback);
     }
 
-    this.addResourceParent = function(resourcesUID, parentUid){
-        console.log("addResourceParent:", resourcesUID, parentUid);
-        persistence.addResourceParent(resourcesUID, parentUid);
+    this.addResourceParent = function(resourcesUID, parentUid, callback){
+        persistence.addResourceParent(resourcesUID, parentUid, callback);
     }
 
-    this.addZoneParent = function(zoneId, parentZoneId){
-        console.log("addZoneParent:", zoneId, parentZoneId);
-        persistence.addZoneParent(zoneId, parentZoneId);
+    this.addZoneParent = function(zoneId, parentZoneId, callback){
+        persistence.addZoneParent(zoneId, parentZoneId, callback);
     }
 
     /*
@@ -246,13 +244,4 @@ function Concern(concernName, persistence, exceptionalRulesFunction, afterCheckF
 
 exports.createConcern = function(concernName, persistence, exceptionalRulesFunction, afterCheckFunction){
     return new Concern(concernName, persistence, exceptionalRulesFunction, afterCheckFunction);
-}
-
-
-exports.enableACLConfigurator = function(){
-    require("./aclConfigurator");
-}
-
-exports.enableACLChecker = function(){
-    require("./aclChecker")
 }
